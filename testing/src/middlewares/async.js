@@ -1,5 +1,3 @@
-import React from "react";
-
 export default ({ dispatch }) => next => action => {
   //Check to see if actions have a promise in the 'payload' property
   if (!action.payload || !action.payload.then) {
