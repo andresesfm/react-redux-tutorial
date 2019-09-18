@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost/auth");
 const app = new express();
 //App setup
 app.use(morgan("combined"));
-app.use(bodyParser.json({ type: "*.*" }));
+app.use(bodyParser.json()); //{ type: "*.*" }
 router(app);
 //server setup
 
