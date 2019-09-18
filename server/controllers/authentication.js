@@ -1,4 +1,11 @@
+import jwt from "jwt-simple";
+import config from "../config";
 import User from "../models/user";
+
+const tokenForUser = user => {
+  const timestamp = new Date().getTime();
+  return jwt.encode({ sub: user.id, iat: timestamp }, config.secret);
+};
 
 const signup = (req, res, next) => {
   const email = req.body.email;
@@ -29,7 +36,7 @@ const signup = (req, res, next) => {
       }
 
       // respond to request
-      res.send({ success: true });
+      res.send({ token: tokenForUser(user) });
     });
   });
 };
