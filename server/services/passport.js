@@ -28,3 +28,5 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
 });
 // Tell passport to use this Strategy
 passport.use(jwtLogin);
+
+export default jwtLogin;
