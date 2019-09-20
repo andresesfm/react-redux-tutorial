@@ -22,6 +22,7 @@ export const signin = (formProps, callback) => async dispatch => {
       formProps
     );
     dispatch({ type: AUTH_USER, payload: response });
+    localStorage.setItem("token", response.data.token);
     callback();
   } catch (e) {
     dispatch({
