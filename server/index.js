@@ -5,12 +5,14 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import router from "./router";
 import mongoose from "mongoose";
+import cors from "cors";
 // DB setup;
 mongoose.connect("mongodb://localhost/auth");
 
 const app = new express();
 //App setup
 app.use(morgan("combined"));
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(bodyParser.json()); //{ type: "*.*" }
 router(app);
 //server setup
