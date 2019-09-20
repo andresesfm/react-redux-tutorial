@@ -15,6 +15,22 @@ export const signup = (formProps, callback) => async dispatch => {
   }
 };
 
+export const signin = (formProps, callback) => async dispatch => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3090/signin",
+      formProps
+    );
+    dispatch({ type: AUTH_USER, payload: response });
+    callback();
+  } catch (e) {
+    dispatch({
+      type: AUTH_ERROR,
+      payload: "Please check your user name and password"
+    });
+  }
+};
+
 export const signout = () => {
   localStorage.setItem("token", null);
   return { type: AUTH_SIGNOUT };
