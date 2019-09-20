@@ -1,4 +1,4 @@
-import { AUTH_USER, AUTH_ERROR } from "./types";
+import { AUTH_USER, AUTH_ERROR, AUTH_SIGNOUT } from "./types";
 import axios from "axios";
 
 export const signup = (formProps, callback) => async dispatch => {
@@ -8,8 +8,14 @@ export const signup = (formProps, callback) => async dispatch => {
       formProps
     );
     dispatch({ type: AUTH_USER, payload: response });
+    localStorage.setItem("token", response.data.token);
     callback();
   } catch (e) {
     dispatch({ type: AUTH_ERROR, payload: "Email in use" });
   }
+};
+
+export const signout = () => {
+  localStorage.setItem("token", null);
+  return { type: AUTH_SIGNOUT };
 };
